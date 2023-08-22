@@ -23,6 +23,10 @@ void printVariable(){
     char* name = "maxwell";
     printf("Name\taliasName\thigh\tmoney\tage\t\n");
     printf("%s\t%c\t%f\t%f\t%d\n",name,aliasName,high,money,age);
+
+    float pi = 3.1415926;
+    printf("pi=%.2f\n",pi);
+    printf("pi=%.*f\n",4,pi);
 }
 
 int c = 99;
@@ -37,6 +41,25 @@ void change2(){
     printf("c=%d\n",c);
 }
 
+void printWidth(){
+    int a = 111;
+    printf("a=%6d",a);
+}
+
+void printLength(){
+    printf("\n---------------\n");
+    char a = 's';
+    short int b = 123;
+    int c = 123;
+    long int d = 123;
+    long long int e = 123;
+    printf("a=%hhd\n",a);//97
+    printf("b=%hd\n",b);//123
+    printf("c=%d\n",c);//123
+    printf("d=%ld\n",d);
+    printf("d=%lld\n",e);
+}
+
 void main(){
     printConst();
     printVariable();
@@ -44,4 +67,6 @@ void main(){
     printf("c=%d\n",c);
     change2();
     printf("c=%d\n",c);
+    printWidth();
+    printLength();
 }
