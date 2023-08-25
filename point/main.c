@@ -15,7 +15,23 @@ void point(){
     printf("aPoint=%p",aPoint);
 }
 
+void point2(){
+    int a = 1;
+    int z = 22;
+    int *b = &a;
+    printf("指针b=%d\n",*b);//1
+    int *c = &a;
+    a = 34;
+    printf("指针b=%d\n",*b);//34
+    printf("指针c=%d\n",*c);//34
+    c = &z;
+    printf("指针c=%d\n",*c);//22
+
+}
+
+
 void main(){
     //printAddress();
-    point();
+    //point();
+    point2();
 }
