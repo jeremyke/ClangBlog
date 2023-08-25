@@ -49,14 +49,76 @@ void callArrFun(){
     printArray(arr);
 }
 
+void erArray(){
+    int array1[2][3] = {{1,2,3},{6,7,8}};
+    int array2[2][3];array2[1][2] = 4;
+    int a[2][3] = {{80,75,92},{61,65,71}};
+    int b[2][3] = {80,75,92,61,65,71};
 
+
+
+    printf("array1[0][1]=%d",array1[0][1]);
+}
+
+int erArrayV2(){
+    char cs[2][3]={
+            {'a','b','c'},
+            {'d','e','f'}
+    };
+    //cs == &cs == &cs[0] == &cs[0][0]
+    printf("cs=%p\n",cs);//0060FEAA
+    printf("&cs=%p\n",&cs);//0060FEAA
+    printf("&cs[0]=%p\n",&cs[0]);//0060FEAA
+    printf("&cs[0][0]=%p\n",&cs[0][0]);//0060FEAA
+    return 0;
+}
+
+int erArray3(char ch){
+    ch = 'g';
+    return 0;
+}
+
+int erArray4(char ch[]){
+    ch[0] = 'k';
+    ch[1] = 'p';
+    ch[2] = 'l';
+}
+
+int erArray5(char ch[][3]){
+    ch[1][2] = 'w';
+}
+
+int erArray6(char ch[2][3]){
+    int row = sizeof(ch);//输出4或8
+    printf("row=%zu\n",row);
+}
+
+int erArray7(char ch[][3]){
+    int col = sizeof(ch[0]);//输出3
+    printf("row=%zu\n",col);
+}
+
+int callErArray(){
+    char ch1[2][3] = {{'a','b','c'},{'a','s','d'}};
+    erArray3(ch1[1][2]);
+    printf("ch1[1][2]=%c\n",ch1[1][2]);//d
+    erArray4(ch1[1]);
+    printf("ch1[1][2]=%c\n",ch1[1][2]);//l
+    erArray5(ch1);
+    printf("ch1[1][2]=%c\n",ch1[1][2]);//w
+    erArray6(ch1);
+    erArray7(ch1);
+    return 0;
+}
 
 
 int main(){
     //array();
     //btc();
     //arrayV2();
-    callArrFun();
+    //callArrFun();
+    //erArray();
+    callErArray();
 
     return 0;
 }
