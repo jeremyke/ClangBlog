@@ -40,18 +40,47 @@ void structTest3(){
 }
 
 void structTest4(){
-    struct Person{
-        char* name;
-        char* sex;
-    };
-    struct  Person perArr[3];
-    perArr[0] = {"aa","nan"};
-    printf("stu0.name=%s,stu1.sex=%s\n",perArr[0].name,perArr[0].sex);
+    int nums[3];
+    nums[2] = 1;
+    printf("nums[2]=%d",nums[2]);
 }
 
+void structTest5(){
+    struct Student{
+        char *name;
+        int age;
+    };
+    struct Student stu[2];
+    stu[0].name = "kkl";
+    stu[0].age = 33;
+    printf("stu0.name=%s,stu1.age=%d\n",stu[0].name,stu[0].age);
+}
 
-void main(){
+void structTest6(){
+    struct Student{
+        char *name;
+        int age;
+    };
+    //定义一个结构体变量
+    struct Student stu={"lnj",18};
+    //定义一个指向结构体的指针变量
+    struct Student *stup;
+    //指向结构体变量stu
+    stup=&stu;
+    //方式1：结构体变量名.成员名
+    printf("name=%s,age=%d\n",stu.name,stu.age);
+    //方式2：(*指针变量名).成员名
+    printf("name=%s,age=%d\n",(*stup).name,(*stup).age);
+    //方式3：指针变量名->成员名
+    printf("name=%s,age=%d\n",stup->name,stup->age);
+}
+
+int main(){
     //structTest1();
     //structTest2();
-    structTest3();
+    //structTest3();
+    //structTest4();
+    //structTest5();
+    structTest6();
+    return 0;
 }
