@@ -75,12 +75,64 @@ void structTest6(){
     printf("name=%s,age=%d\n",stup->name,stup->age);
 }
 
+void structTest7(){
+    struct Date{
+        int year;
+        int month;
+        int day;
+    };
+    struct Student{
+        int age;
+        char *name;
+        double score;
+        struct Date birthday;
+    };
+}
+
+void structTest8(){
+    struct Student{
+        int age;
+        //struct Student stu;
+        struct Student *stu;
+    };
+}
+
+void structTest9(){
+    struct Date{
+        int year;
+        int month;
+        int day;
+    };
+    struct Student{
+        int age;
+        char *name;
+        double score;
+        struct Date birthday;
+    };
+    struct Student stu1 = {13,"xiaoming",88,{2020,11,12}};
+    printf("stu1的出生年份是：%d",stu1.birthday.year);//2020
+}
+
+void structTest10(struct Student stu1){
+    stu1.name = "xxxx";
+    printf("stu1的name是：%s\n",stu1.name);//xxx
+}
+
+void callStructTest10(){
+    struct Student stu1 = {"klp",20};
+    printf("stu1的name是：%s\n",stu1.name);//klp
+    structTest10(stu1);
+    printf("stu1的name是：%s\n",stu1.name);//klp
+}
+
 int main(){
     //structTest1();
     //structTest2();
     //structTest3();
     //structTest4();
     //structTest5();
-    structTest6();
+    //structTest6();
+    //structTest9();
+    callStructTest10();
     return 0;
 }
