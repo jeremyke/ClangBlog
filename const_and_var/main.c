@@ -60,13 +60,23 @@ void printLength(){
     printf("d=%lld\n",e);
 }
 
+void test11(){
+    volatile const int a=5;
+    int *p;
+    p = &a;
+    *p = 10;
+    printf("a=%d---a的地址%p\n",a,&a);//5
+    printf("*p=%d---*p的地址%p\n",*p,p);//10
+}
+
 void main(){
-    printConst();
-    printVariable();
-    change1();
-    printf("c=%d\n",c);
-    change2();
-    printf("c=%d\n",c);
-    printWidth();
-    printLength();
+//    printConst();
+//    printVariable();
+//    change1();
+//    printf("c=%d\n",c);
+//    change2();
+//    printf("c=%d\n",c);
+//    printWidth();
+//    printLength();
+    test11();
 }
