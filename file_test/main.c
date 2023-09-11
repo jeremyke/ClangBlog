@@ -96,7 +96,7 @@ void fileTest8(){
 
 
 void fileTest9(){
-    FILE *fp = fopen("09.txt","w+");
+    FILE *fp = fopen("./file_test/09.txt","w+");
     //注意:fputs不会自动添加\n
     fputs("12345678910\n",fp);
     fputs("12345678910\n",fp);
@@ -113,6 +113,79 @@ void fileTest9(){
     fclose(fp);
 }
 
+void fileTest10(){
+    FILE *fp = fopen("./file_test/10.txt","wb+");
+    //注意:fwrite不会关心写入数据的格式
+    char *str="lnj\0it666";
+    /**第一个参数:被写入数据指针
+     * *第二个参数:每次写入多少个字节
+     * *第三个参数:需要写入多少次
+     * *第四个参数:已打开文件结构体指针
+     * */
+    fwrite((void*)str,9,1,fp);
+    fclose(fp);
+
+}
+
+void fileTest11(){
+    //10.txt文本内容为：lnj\0it666
+    FILE *fp = fopen("./file_test/10.txt","rb+");
+    char buf[1024]={0};
+    //fread函数读取成功返回读取到的字节数,读取失败返回0
+
+    /**第一个参数:存储读取到数据的容器
+     * *第二个参数:每次读取多少个字节
+     * *第三个参数:需要读取多少次
+     * *第四个参数:已打开文件结构体指针
+     * */
+
+    int n=fread(buf,1,1024,fp);
+    printf("%i\n",n);//9
+    for(int i=0;i<n;i++){
+        printf("%c",buf[i]);
+    }
+    fclose(fp);
+}
+
+void fileTest12(){
+    //10.txt文本内容为：lnj\0it666
+    FILE *fr = fopen("./file_test/10.txt","rb+");
+    char buf[1024]={0};
+    while(fread(buf,4,1,fr)>0){
+        printf("%s\n",buf);//lnj   it66
+    }
+    fclose(fr);
+
+    printf("%s\n","-------");
+
+    FILE *fr1 = fopen("./file_test/10.txt","rb+");
+    char buf1[1024]={0};
+    while(fread(buf1,1,4,fr1)>0){
+        printf("%s\n",buf1);//lnj   it66 6t66
+    }
+    fclose(fr1);
+
+    printf("%s\n","-------");
+
+    FILE *fr2 = fopen("./file_test/10.txt","rb+");
+    char buf2[1024]={0};
+    while(fread(buf2,1,4,fr2)>0){
+        printf("%c\n",buf2[0]);//l i 6
+    }
+    fclose(fr2);
+}
+
+
+void fileTest13(){
+    FILE *fp=fopen("./file_test/10.txt","wb+");
+    int ages[4]={1,3,5,6};
+    fwrite(ages,sizeof(ages),1,fp);
+    rewind(fp);
+    int data;
+    while(fread(&data,sizeof(int),1,fp)>0){
+        printf("data=%i\n",data);
+    }
+}
 
 
 int main(){
@@ -122,7 +195,11 @@ int main(){
     //fileTest5();
     //fileTest6();
     //fileTest7();
-    fileTest8();
+    //fileTest8();
     //fileTest9();
+    //fileTest10();
+    //fileTest11();
+    //fileTest12();
+    fileTest13();
     return 0;
 }
