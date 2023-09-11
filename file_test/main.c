@@ -3,6 +3,12 @@
 //
 #include <stdio.h>
 
+typedef struct{
+    char *name;
+    int age;
+    double height;
+} Person;
+
 // 文本形式
 void fileTest1(){
     int num = 999;
@@ -187,6 +193,40 @@ void fileTest13(){
     }
 }
 
+void fileTest14(){
+    Person p1 = {"klp",19,187.6};
+    FILE *fp=fopen("./file_test/person.stu","wb+");
+    //读取结构体数据写入文件
+    fwrite(&p1,sizeof(p1),1,fp);
+    rewind(fp);
+
+    //从文件中读取数据写入结构体
+    Person p2;
+    fread(&p2,sizeof(p2),1,fp);
+    printf("name=%s\n",p2.name);//klp
+    printf("age=%i\n",p2.age);//19
+    printf("height=%lf\n",p2.height);//187.6
+}
+
+
+void fileTest15(){
+    Person p1[] = {{"klp",19,187.6},{"bbb",20,147.6},{"bbb",15,137.6}};
+    FILE *fp=fopen("./file_test/person.stu2","wb+");
+    //读取结构体数据写入文件
+    fwrite(&p1,sizeof(p1),1,fp);
+    rewind(fp);
+
+    //从文件中读取数据写入结构体
+    Person p2;
+    while(fread(&p2,sizeof(p2),1,fp)>0){
+        printf("name=%s\n",p2.name);
+        printf("age=%i\n",p2.age);
+        printf("height=%lf\n",p2.height);
+    }
+
+}
+
+
 
 int main(){
     //fileTest1();
@@ -200,6 +240,8 @@ int main(){
     //fileTest10();
     //fileTest11();
     //fileTest12();
-    fileTest13();
+    //fileTest13();
+    //fileTest14();
+    fileTest15();
     return 0;
 }
