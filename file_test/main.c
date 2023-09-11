@@ -2,6 +2,9 @@
 // Created by 松夏 on 2023/9/7.
 //
 #include <stdio.h>
+#define SEEK_CUR 1 //当前文字
+#define SEEK_END 2 //文件结尾
+#define SEEK_SET 0 //文件开头
 
 typedef struct{
     char *name;
@@ -226,6 +229,52 @@ void fileTest15(){
 
 }
 
+void fileTest16(){
+    char *str="123456789";
+    FILE *fp=fopen("./file_test/16.txt","w+");
+    long cp=ftell(fp);
+    printf("cp=%li\n",cp);//0
+    //写入一个字节
+    fputc(str[0],fp);
+    cp=ftell(fp);
+    printf("cp=%li\n",cp);//1
+    fclose(fp);
+}
+
+void fileTest17(){
+    char *str="123456789";
+    FILE *fp=fopen("./file_test/17.txt","w+");
+    long cp=ftell(fp);
+    printf("cp=%li\n",cp);//0
+    //写入一个字节
+    fputc(str[0],fp);
+    cp=ftell(fp);
+    printf("cp=%li\n",cp);//1
+    rewind(fp);
+    cp=ftell(fp);
+    printf("cp=%li\n",cp);//0
+    fclose(fp);
+}
+
+void fileTest18(){
+    FILE *fp=fopen("./file_test/18.txt","w+");
+    fputs("123456789",fp);
+    //将文件指针移动到文件结尾,并且偏移0个单位
+    fseek(fp,0,SEEK_END);
+    int len=ftell(fp);
+    //计算文件长度
+    printf("len=%i\n",len);
+    fclose(fp);
+}
+
+
+void fileTest19(){
+    FILE *fp=fopen("./file_test/19.txt","w+");
+    fputs("123456789",fp);
+    fseek(fp,7,SEEK_SET);
+    fputs("lnj",fp);//1234567lnj
+    fclose(fp);
+}
 
 
 int main(){
@@ -242,6 +291,10 @@ int main(){
     //fileTest12();
     //fileTest13();
     //fileTest14();
-    fileTest15();
+    //fileTest15();
+    //fileTest16();
+    //fileTest17();
+    //fileTest18();
+    fileTest19();
     return 0;
 }
